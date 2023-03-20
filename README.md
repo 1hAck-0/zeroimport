@@ -37,4 +37,4 @@ Most if not all function imports you will ever need in a kernelmode driver on Wi
 - Avoids **unwanted IAT (Import Address Table) Hooks** inside your driver placed by other loaded drivers
 
 ## Creidts
-Inspired by [lazy-import](https://github.com/JustasMasiulis/lazy_importer)
+Inspired by [lazy-import](https://github.com/JustasMasiulis/lazy_importer) which does the same thing but only for usermode applications

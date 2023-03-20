@@ -30,7 +30,7 @@ if (ZR_IMP(MmIsAddressValid)(Address))
 - **C++11** and higher
 
 # How it Works
-Since most if not all function imports you will ever need in a kernelmode driver on Windows are inside `ntoskrnl.exe`, ZeroImport just searches ntoskrnl.exe's exported functions at runtime and finds the right function through hashing. The names of the functions that we call inside our code are hashed at compile-time.
+Most if not all function imports you will ever need in a kernelmode driver on Windows are inside `ntoskrnl.exe`, ZeroImport just searches ntoskrnl.exe's exported functions at runtime and finds the right function through hashing. The names of the functions that we call inside our code are hashed at compile-time.
 
 # Use Purposes
 - **Difficult Static Analysis** of your driver

@@ -26,7 +26,7 @@ if (ZR_IMP(MmIsAddressValid)(Address))
 ```
 
 # Support
-- **Any Windows version** should be supported
+- **All Windows version** should be supported (literally all)
 - **C++11** and higher
 
 # How it Works

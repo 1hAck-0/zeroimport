@@ -10,7 +10,7 @@ if (!zeroimport::init())
 }
 ```
 
-The following example shows how you could call `MmIsAddressValid` without statically importing the function in your driver. This can be, of course, applied to any imported function you want to call.
+The following example shows how you could for example call `MmIsAddressValid` without statically importing the function in your driver. This can be, of course, applied to any imported function you want to call.
 ```cpp
 PVOID Address = 0;
 

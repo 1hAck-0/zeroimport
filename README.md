@@ -1,7 +1,7 @@
 # ZeroImport for Windows Kernel Drivers
 ZeroImport is a super lightweight C++ library for Windows Kernel Drivers. It allows you to hide any function import in your kernel driver by importing the functions at runtime.
 
-# Use Example
+## Use Example
 The following example shows how you could call `MmIsAddressValid` without statically importing the function in your driver. This can be, of course, applied to any imported function you want to call.
 ```cpp
 PVOID Address = 0;
@@ -25,13 +25,16 @@ if (ZR_IMP(MmIsAddressValid)(Address))
 }
 ```
 
-# Support
+## Support
 - **All Windows version** should be supported (literally all)
 - **C++11** and higher
 
-# How it Works
+## How it Works
 Most if not all function imports you will ever need in a kernelmode driver on Windows are inside `ntoskrnl.exe`, ZeroImport just searches ntoskrnl.exe's exported functions at runtime and finds the right function through hashing. The names of the functions that we call inside our code are hashed at compile-time.
 
-# Use Purposes
+## Use Purposes
 - **Difficult Static Analysis** of your driver
 - Avoids **unwanted IAT (Import Address Table) Hooks** inside your driver placed by other loaded drivers
+
+## Creidts
+Inspired by [lazy-import](https://github.com/JustasMasiulis/lazy_importer)

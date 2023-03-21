@@ -47,12 +47,17 @@ if (!InitialProcess)
 - **All Windows version** should be supported (literally all)
 - **C++11** and higher
 
-## How it Works
-Most if not all imports you will ever need in a kernelmode driver on Windows are inside `ntoskrnl.exe` so ZeroImport just searches ntoskrnl.exe's exported symbols at runtime and finds the right symbol by its name through hash-comparing. The names of the symbols that we want to import inside our code are hashed at compile-time for faster runtime and better security (see `zeroimport::detail::HashString()`).
-
 ## Use Purposes
 - **Difficult Static Analysis** of your driver
 - Avoids **unwanted IAT (Import Address Table) Hooks** inside your driver placed by other loaded drivers
+
+## Proof of Concept
+This shows the difference between the simple source-code and compiled pseudocode (decompiled in IDA Pro)
+https://imgur.com/a/hkE4z3v
+As you can see, `PsGetProcessId` and `PsInitialSystemProcess` are not imported although I am using them in the example driver. However ZeroImport needs to import just one function: `MmGetSystemRoutineAddress` to get `PsLoadedModuleList` and loop through the loaded system drivers and find ntoskrnl's base which is why you will always have at least one import in your driver. This isn't a big issue though because it doesn't defeat any of ZeroImport's use purposes.
+
+## How it Works
+Most if not all imports you will ever need in a kernelmode driver on Windows are inside `ntoskrnl.exe` so ZeroImport just searches ntoskrnl.exe's exported symbols at runtime and finds the right symbol by its name through hash-comparing. The names of the symbols that we want to import inside our code are hashed at compile-time for faster runtime and better security (see `zeroimport::detail::HashString()`).
 
 ## Credits
 Inspired by [lazy-importer](https://github.com/JustasMasiulis/lazy_importer) which does the same thing but only for usermode applications

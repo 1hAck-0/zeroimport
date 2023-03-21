@@ -1,5 +1,5 @@
 # ZeroImport for Windows Kernel Drivers
-ZeroImport is a super-lightweight and easy to use C++ library for Windows Kernel Drivers. It allows you to hide any import in your kernel driver by importing at runtime.
+ZeroImport is a lightweight and easy to use C++ library for Windows Kernel Drivers. It allows you to hide any import in your kernel driver by importing at runtime.
 
 ## Use Example
 First **initialize ZeroImport** at the very beginning of your driver (DriverEntry).

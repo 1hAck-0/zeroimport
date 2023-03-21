@@ -52,7 +52,8 @@ if (!InitialProcess)
 - Avoids **unwanted IAT (Import Address Table) Hooks** inside your driver placed by other loaded drivers
 
 ## [Proof of Concept](https://imgur.com/a/hkE4z3v)
-This shows the difference between the simple source-code and compiled pseudocode (decompiled in IDA Pro)
+This shows the difference between the simple source-code and compiled pseudocode (decompiled in IDA Pro).
+
 As you can see, `PsGetProcessId` and `PsInitialSystemProcess` are not imported although I am using them in the example driver. However ZeroImport needs to import just one function: `MmGetSystemRoutineAddress` to get `PsLoadedModuleList` and loop through the loaded system drivers and find ntoskrnl's base which is why you will always have at least one import in your driver. This isn't a big issue though because it doesn't defeat any of ZeroImport's use purposes.
 
 ## How it Works

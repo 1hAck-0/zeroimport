@@ -24,7 +24,7 @@ bool zeroimport::init()
 	return true;
 }
 
-PVOID zeroimport::detail::GetModuleExport(HashType Hash)
+PVOID zeroimport::detail::GetNtoskrnlExport(HashType Hash)
 {
 	IMAGE_EXPORT_DIRECTORY* ExportDir = (IMAGE_EXPORT_DIRECTORY*)NtoskrnlExportDir;
 

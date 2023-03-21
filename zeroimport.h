@@ -6,10 +6,12 @@
 
 
 
-#define ZR_IMP_NOT_CACHED(func) ((decltype(&func))zeroimport::detail::GetModuleExport(zeroimport::detail::HashString(#func)))
-#define ZR_IMP_CACHED(func) ((decltype(&func))zeroimport::detail::GetModuleExport<zeroimport::detail::HashString(#func)>())
+#define ZR_IMP_NOT_CACHED(imp) ((decltype(&imp))zeroimport::detail::GetNtoskrnlExport(zeroimport::detail::HashString(#imp)))
+#define ZR_IMP_CACHED(imp) ((decltype(&imp))zeroimport::detail::GetNtoskrnlExport<zeroimport::detail::HashString(#imp)>())
 
 #define ZR_IMP ZR_IMP_CACHED
+
+#define ZR_IMP_UNIQUE_KEY 0xF572458C39B10 // TO DO: change this number to generate unique hashes
 
 namespace zeroimport
 {
@@ -22,31 +24,31 @@ namespace zeroimport
 
 		typename typedef uintptr_t HashType;
 
-		PVOID GetModuleExport(HashType Hash);
+		PVOID GetNtoskrnlExport(HashType Hash);
 
 		template<HashType Hash>
-		inline PVOID GetModuleExport()
+		inline PVOID GetNtoskrnlExport()
 		{
 			static PVOID pCached = 0;
 			if (!pCached)
-				pCached = GetModuleExport(Hash);
+				pCached = GetNtoskrnlExport(Hash);
 
 			return pCached;
 		}
 
 		inline constexpr auto HashString(const char* Str)
 		{
-			HashType ret = 0;
+			HashType Hash = ZR_IMP_UNIQUE_KEY;
 
 			for (size_t i = 0; Str[i]; i++)
 			{
 				HashType c = Str[i];
 
-				ret ^= (c * c) << ((i + 1) % 8);
-				ret *= i + 1;
+				Hash ^= (c * c) << ((i + 1) % 8);
+				Hash *= i + 1;
 			}
 
-			return ret;
+			return Hash;
 		}
 
 

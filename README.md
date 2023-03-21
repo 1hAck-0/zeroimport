@@ -6,7 +6,7 @@ First **initialize ZeroImport** at the very beginning of your driver (DriverEntr
 ```cpp
 if (!zeroimport::init())
 {
-   // error handling
+   // error handling (normally this should never happen)
 }
 ```
 

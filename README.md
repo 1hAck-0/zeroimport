@@ -44,7 +44,7 @@ if (!InitialProcess)
 ```
 
 ## Support
-- **All Windows version** should be supported (literally all)
+- **All Windows versions** should be supported (literally all)
 - **C++11** and higher
 
 ## Use Purposes

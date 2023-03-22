@@ -64,6 +64,8 @@ For more information, please refer to <https://unlicense.org>
 
 namespace zeroimport
 {
+	bool init(PLIST_ENTRY pModuleEntryList);
+	bool init(PDRIVER_OBJECT pDriverObject);
 	bool init();
 
 	namespace detail
@@ -209,7 +211,8 @@ namespace zeroimport
 			ULONG CheckSum;
 			ULONG TimeDateStamp;
 		} LDR_DATA_TABLE_ENTRY, * PLDR_DATA_TABLE_ENTRY;
-		PLDR_DATA_TABLE_ENTRY GetSystemModuleEntry(const wchar_t* ModuleName);
+		PLIST_ENTRY GetPsLoadedModuleList();
+		PLDR_DATA_TABLE_ENTRY GetSystemModuleEntry(PLIST_ENTRY pModuleEntryList, const wchar_t* ModuleName);
 	}
 }
 

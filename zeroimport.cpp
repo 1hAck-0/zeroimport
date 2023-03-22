@@ -76,14 +76,14 @@ namespace zeroimport
 					return 0;
 			}
 
-			for (PLIST_ENTRY pLink = pModuleList; pLink != pModuleList->Blink; pLink = pLink->Flink)
+			for (PLIST_ENTRY pEntry = pModuleList; pEntry != pModuleList->Blink; pEntry = pEntry->Flink)
 			{
-				PLDR_DATA_TABLE_ENTRY pEntry = CONTAINING_RECORD(pLink, LDR_DATA_TABLE_ENTRY, InLoadOrderModuleList);
-				if (!pEntry->BaseDllName.Buffer)
+				PLDR_DATA_TABLE_ENTRY ModuleEntry = CONTAINING_RECORD(pEntry, LDR_DATA_TABLE_ENTRY, InLoadOrderModuleList);
+				if (!ModuleEntry->BaseDllName.Buffer)
 					continue;
 
-				if (wcscimp(pEntry->BaseDllName.Buffer, ModuleName))
-					return pEntry;
+				if (wcscimp(ModuleEntry->BaseDllName.Buffer, ModuleName))
+					return ModuleEntry;
 			}
 
 			return 0;

@@ -4,7 +4,14 @@ ZeroImport is a lightweight and easy to use C++ library for Windows Kernel Drive
 ## Use Example
 First **initialize ZeroImport** at the very beginning of your driver (DriverEntry).
 ```cpp
+// if you don't have access to a driver object
 if (!zeroimport::init())
+{
+   // error handling (normally zeroimport::init() should never fail!)
+}
+
+// if you have access to a driver object, this version of init is recommended
+if (!zeroimport::init(pDriverObject))
 {
    // error handling (normally zeroimport::init() should never fail!)
 }

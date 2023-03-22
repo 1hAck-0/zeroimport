@@ -60,5 +60,7 @@ However ZeroImport needs to import just one function: `MmGetSystemRoutineAddress
 ## How it Works
 Most if not all imports you will ever need in a kernelmode driver on Windows are inside `ntoskrnl.exe` so ZeroImport just searches ntoskrnl.exe's exported symbols at runtime and finds the right symbol by its name through hash-comparing. The names of the symbols that we want to import inside our code are hashed at compile-time for faster runtime and better security (see `zeroimport::detail::HashString()`).
 
+The best part about ZeroImport is that it doesn't produce any strings in the compiled binary (driver), even at runtime it doesn't use or leave any string in memory.
+
 ## Credits
 Inspired by [lazy-importer](https://github.com/JustasMasiulis/lazy_importer) which does the same thing but only for usermode applications.
